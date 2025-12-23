@@ -155,7 +155,7 @@ async function startChat(receiverId, username){
 
     currentChatId = receiverId;
     currentChatUsername = username;
-    syncChatUserDisplay(username); // Sync mobile and desktop headers
+    syncChatUserDisplay(username);
     chatMessages.innerHTML = '';
 
     try {
@@ -164,7 +164,7 @@ async function startChat(receiverId, username){
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ readerId: user.id, chatPartnerId: receiverId })
         });
-        //console.log("Messages marked as read.");
+        
         persistentUnreadCounts[receiverId] = 0;
         loadFriends();
     } catch (err) {
@@ -274,12 +274,10 @@ socket.on('receiveMessage', msg => {
 });
 
 socket.on('updateUnreadCounts', () => {
-    //console.log('Received updateUnreadCounts event');
     fetchUnreadCounts();
 });
 
 socket.on('messageDeleted', ({ messageId, senderId }) => {
-    //console.log(`Received messageDeleted event for message ${messageId} from ${senderId}`);
     const bubble = chatMessages.querySelector(`[data-message-id="${messageId}"]`);
     if (bubble) {
         bubble.style.transition = 'opacity 0.5s';
