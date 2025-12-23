@@ -48,8 +48,7 @@ async function validateUser() {
         window.location.href = 'login.html';
         return false;
     }
-    try {
-        //console.log(`Validating user ID: ${user.id}`);
+    try{
         const res = await fetch(`/api/user/validate/${user.id}`);
         const data = await res.json();
         if (!res.ok) {
@@ -58,7 +57,7 @@ async function validateUser() {
             window.location.href = 'login.html';
             return false;
         }
-        //console.log('User validated successfully:', user.id);
+        
         return true;
     } catch (err) {
         console.error('Network error validating user:', err);
@@ -81,12 +80,10 @@ if (user.id && user.username) {
 }
 
 async function fetchUnreadCounts() {
-    try {
-        //console.log(`Fetching unread counts for user: ${user.id}`);
+    try{
         const res = await fetch(`/api/message/unread/${user.id}`);
         if (res.ok) {
             persistentUnreadCounts = await res.json();
-            //console.log("Fetched unread counts:", persistentUnreadCounts);
             loadFriends();
             loadOtherUsers();
         } else {
@@ -148,8 +145,7 @@ async function loadOtherUsers() {
     }
 }
 
-async function startChat(receiverId, username) {
-    // Hide sidebar on mobile
+async function startChat(receiverId, username){
     if (window.innerWidth < 768) {
         sidebar.classList.add('-translate-x-full');
     }
