@@ -30,7 +30,7 @@ router.post('/signup', async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const passwordHash = await bcrypt.hash(password, salt);
         const verificationCode = generateVerificationCode();
-        const verificationCodeExpires = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+        const verificationCodeExpires = new Date(Date.now() + 10 * 60 * 1000);
 
         const newUser = new User({
             username,
