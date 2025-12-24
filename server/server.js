@@ -38,18 +38,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'client', 'index.html'));
 });
 
-/*
-app.get('/privacy', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'client', 'privacy.html'));
-});
-app.get('/terms', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'client', 'terms.html'));
-});
-app.get('/contact', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'client', 'contact.html'));
-});
-*/
-
 // Cleanup expired unverified users
 setInterval(async () => {
     try {
@@ -58,11 +46,11 @@ setInterval(async () => {
             isVerified: false,
             verificationCodeExpires: { $lte: now }
         });
-        //console.log(`Cleaned up ${deletedUsers.deletedCount} unverified users`);
+        
     } catch (err) {
         //console.error('Error cleaning up unverified users:', err);
     }
-}, 60 * 1000); // Run every minute
+}, 60 * 1000); 
 
 // Cleanup expired messages
 setInterval(async () => {
